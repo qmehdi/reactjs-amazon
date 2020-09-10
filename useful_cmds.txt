@@ -1,0 +1,6 @@
+#To Install node packages
+sudo npm install -g serve
+
+sudo npm run build
+
+sudo serve -s build
