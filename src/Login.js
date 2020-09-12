@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./Login.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { auth } from "./firebase";
 
 function Login() {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,6 +25,10 @@ function Login() {
       .then((auth) => {
         // It successfully created a new user with email and password
         console.log(auth);
+        // If the auth object comes back as non-empty, user was successfully created; and we can redirect the user to /
+        if (auth) {
+          history.push("/");
+        }
       })
       .catch((error) => alert(error.message));
   };
