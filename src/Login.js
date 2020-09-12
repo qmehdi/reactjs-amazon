@@ -12,7 +12,15 @@ function Login() {
     // Prevent page refresh
     e.preventDefault();
 
-    //some fancy firebase login shiiit
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then((auth) => {
+        // Successfully signed in, print auth object to the console
+        console.log(auth);
+        // Redirect the user to the / page
+        history.push("/");
+      })
+      .catch((error) => alert(error.message));
   };
 
   const register = (e) => {
