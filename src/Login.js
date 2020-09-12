@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import { Link } from "react-router-dom";
 
-
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <div className="login">
       <Link to="/">
@@ -18,10 +20,20 @@ function Login() {
 
         <form>
           <h5>E-mail</h5>
-          <input type="text" />
+          {/* Map the value to the email state; onChange fires an event and sets email value to whatever user types in */}
+          <input
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
           <h5>Password</h5>
-          <input type="password" />
+          {/* Map the value to the password state; onChange fires an event and sets password value to whatever user types in */}
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
           <button type="submit" className="login__signInButton">
             Sign In
