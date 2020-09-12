@@ -1,10 +1,32 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { Link } from "react-router-dom";
+import { auth } from "./firebase";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const signIn = (e) => {
+    // Prevent page refresh
+    e.preventDefault();
+
+    //some fancy firebase login shiiit
+  };
+
+  const register = (e) => {
+    // Prevent page refresh
+    e.preventDefault();
+
+    // Create actual Firebase user with submitted email and password!!!
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((auth) => {
+        // It successfully created a new user with email and password
+        console.log(auth);
+      })
+      .catch((error) => alert(error.message));
+  };
 
   return (
     <div className="login">
@@ -35,7 +57,11 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button type="submit" className="login__signInButton">
+          <button
+            type="submit"
+            onClick={signIn}
+            className="login__signInButton"
+          >
             Sign In
           </button>
         </form>
@@ -46,7 +72,7 @@ function Login() {
           Interest-Based Ads Notice.
         </p>
 
-        <button className="login__registerButton">
+        <button onClick={register} className="login__registerButton">
           Create your Amazon Account
         </button>
       </div>
