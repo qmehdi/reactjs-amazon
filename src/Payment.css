@@ -25,6 +25,7 @@
   flex: 0.2;
 }
 
+/* .payment_details is necessary in order for <CardElement /> on Payment.js to show up */
 .payment__address, .payment__items, .payment__details {
   flex: 0.8;
 }
