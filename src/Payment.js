@@ -7,6 +7,7 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import CurrencyFormat from "react-currency-format";
 import { getBasketTotal } from "./reducer";
 import axios from "./axios";
+import { db } from "./firebase";
 
 function Payment() {
   const [{ basket, user }, dispatch] = useStateValue();
@@ -62,6 +63,18 @@ function Payment() {
       })
       .then(({ paymentIntent }) => {
         // paymentIntent is payment confirmation
+
+        // Push orders into the firebase Db!
+        // Format has to be like db.collection('').doc('').collection('').doc('').set({})
+        db.collection("users") // Reach into the users collection in Firebase Db
+          .doc(user?.uid)  // Look for this user in the db. This user is coming from state, hence must be logged in
+          .collection('orders') // Reach into this specific user's orders
+          .doc(paymentIntent.id) // Create document with paymentIntent Id with the following items
+          .set({
+            basket: basket, // Pass in basket items
+            amount: paymentIntent.amount, // Comes back from Stripe
+            created: paymentIntent.created // Timestamp of when payment was created
+        })
 
         setSucceeded(true);
         setError(null);
