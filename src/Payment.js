@@ -67,6 +67,11 @@ function Payment() {
         setError(null);
         setProcessing(false);
 
+        // Dispatch an event into react context api 
+        dispatch({
+          type: 'EMPTY_BASKET'
+        })
+
         // Dont do history.push because we dont want the user to come back to the payment page
         // Instead swap the page by doing history.replace
         history.replace("/orders");
