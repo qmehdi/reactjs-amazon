@@ -13,12 +13,22 @@ The above creates a ./functions folder
 ### Run the following commands in ./functions folder
 > sudo npm i -g express
 
+> sudo npm i cors
+
+> sudo npm i stripe
+> sudo npm i @stripe/stripe-js
+> sudo npm i @stripe/react-stripe-js
+
 > sudo npm install -g firebase
 
 > sudo npm install -g firebase-tools
 
-> firebase emulators:start
+> firebase emulators:start #inside ./functions
 
-> sudo npm i -g @stripe/stripe-js
-> sudo npm i -g @stripe/react-stripe-js
+### To Deploy the Backend only
+> firebase deploy --only functions #inside project root
 
+### To Deploy the Frontend
+> firebase init >> Hosting >> build >> Yes >> Yes  #inside project root
+
+> npm run build && firebase deploy --only hosting #inside project root
